@@ -9,22 +9,18 @@ class Robot
   end
 
   def reset
-    @name = random_name
+    @name = random_name while exist? name
+    @@names.push(name).last
   end
 
   private
 
   def random_name
-    name = format '%s%03i', ALPHABET.sample, rand(NUMERALS)
-    while exist?(name) do
-      name = format '%s%03i', ALPHABET.sample, rand(NUMERALS)
-    end
-    @@names.push(name).last
+    format '%s%03i', ALPHABET.sample, rand(NUMERALS)
   end
-  
-  private
+
   def exist?(new_name)
-    @@names.include?(new_name) ? true : false
+    @@names.include? new_name
   end
 end
 class BookKeeping
