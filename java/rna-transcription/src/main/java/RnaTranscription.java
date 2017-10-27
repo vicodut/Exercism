@@ -1,28 +1,26 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class RnaTranscription {
+	private Map<String, String> rna;
+
     public String transcribe(String dnaStrand) {
     	String[] dnaStrand_table = dnaStrand.split("");
     	StringBuilder sb = new StringBuilder();
     	int i;
-    	
+
+		rna = new HashMap<String, String>();
+		rna.put("C", "G");
+		rna.put("G", "C");
+		rna.put("T", "A");
+		rna.put("A", "U");
+
     	if (dnaStrand == "") {
-	    	return dnaStrand;		
+	    	return dnaStrand;
     	}
 
     	for (i = 0; i < dnaStrand_table.length; i++) {
-    		switch (dnaStrand_table[i]) {
-    			case "C":
-    				dnaStrand_table[i] = "G";
-    				break;
-    			case "G":
-    				dnaStrand_table[i] = "C";
-    				break;
-    			case "T":
-    				dnaStrand_table[i] = "A";
-    				break;
-    			case "A":
-    				dnaStrand_table[i] = "U";
-    				break;
-    		}
+			dnaStrand_table[i] = rna.get(dnaStrand_table[i]);
     		sb.append(dnaStrand_table[i]);
     	}
 
